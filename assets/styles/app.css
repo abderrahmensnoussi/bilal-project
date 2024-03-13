@@ -1,3 +1,101 @@
 body {
-    background-color: skyblue;
+    background-color: #fff;
+    margin: 0;
+}
+
+.header {
+    width: 100%;
+    height: 100px;
+    background-color: gray;
+    display: flex;
+}
+
+.logo {
+    max-height: 100px;
+}
+
+.header-title {
+    width: 100%;
+    text-align: center;
+    margin: auto;
+    font-size: 32px;
+    color: #fff;
+}
+
+.header-user {
+    width: 200px;
+    align-items: right;
+    margin: auto;
+    font-size: 18px;
+    color: #fff;
+}
+
+.index-block {
+    text-align: center;
+    height: 80vh;
+    padding: 20px;
+}
+
+.btn {
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    text-decoration: none;
+}
+
+.btn:hover {
+    background-color: #45a049;
+}
+
+.title-index {
+    font-size: 55px;
+    margin: 30px;
+}
+
+/* nav bar */
+.container-w {
+    display: flex;
+}
+
+.navbar {
+    background-color: gray;
+    color: white;
+    width: 200px; /* Width of the navbar */
+    height: 100vh; /* Full height of the viewport */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 30px 10px;
+}
+
+.nav-links {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.nav-links li {
+    margin-bottom: 10px;
+}
+
+.nav-links li a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.nav-links li a:hover {
+    color: #ffd700; /* Change color on hover */
+}
+
+.container {
+    flex: 1; /* Take remaining space */
+    padding: 20px;
 }

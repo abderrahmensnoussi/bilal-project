@@ -12,6 +12,24 @@
         {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        <div class="header">
+            <div>
+                <img src="{{ asset('img/logo.jpeg') }}" class="logo">
+            </div>
+            <div class="header-title">
+                ACCEUIL
+            </div>
+            {% if app.user %}
+                <div class="header-user">
+                    AYUGGIYU YU GUIY GGYUYU
+                </div>
+            {% endif %}
+        </div>
+        <div class="container-w">
+            {{ include('nav.html.twig') }}
+            <div class="container">
+                {% block body %}{% endblock %}
+            </div>
+        </div>
     </body>
 </html>

@@ -3,3 +3,16 @@ controllers:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
+
+# config/routes.yaml
+index:
+    path: /
+    controller: App\Controller\IndexController::index
+
+login:
+    path: /login
+    controller: App\Controller\LoginController::login
+
+menu_utilisateur:
+    path: /menu_utilisateur
+    controller: App\Controller\MenuUtilisateurController::index
