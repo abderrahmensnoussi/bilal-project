@@ -6,13 +6,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-class MenuUtilisateurController extends AbstractController
+class FormateurController extends AbstractController
 {
-    #[Route('/menu/utilisateur', name: 'app_menu_utilisateur')]
+    #[Route('/formateur', name: 'app_formateur')]
     public function index(): Response
     {
-        return $this->render('menu_utilisateur/index.html.twig', [
-            'controller_name' => 'MenuUtilisateurController',
+        return $this->render('formateur/index.html.twig', [
+            'title' => 'ACCEUIL Formateur'
         ]);
     }
 }

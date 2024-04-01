@@ -6,11 +6,13 @@ use App\Repository\UtilisateurRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UtilisateurRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
+#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -48,22 +50,6 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 15)]
     private ?string $numtel = null;
 
-    #[ORM\OneToMany(targetEntity: Inscrire::class, mappedBy: 'utilisateur')]
-    private Collection $inscrires;
-
-    #[ORM\ManyToMany(targetEntity: Suivre::class, mappedBy: 'utilisateur')]
-    private Collection $suivres;
-
-    #[ORM\OneToMany(targetEntity: Emarger::class, mappedBy: 'utilisateur')]
-    private Collection $emargers;
-
-    public function __construct()
-    {
-        $this->inscrires = new ArrayCollection();
-        $this->suivres = new ArrayCollection();
-        $this->emargers = new ArrayCollection();
-    }
-
     public function getId(): ?int
     {
         return $this->id;
@@ -99,8 +85,6 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     public function getRoles(): array
     {
         $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
 
         return array_unique($roles);
     }
@@ -195,93 +179,6 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     public function setNumtel(string $numtel): static
     {
         $this->numtel = $numtel;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Inscrire>
-     */
-    public function getInscrires(): Collection
-    {
-        return $this->inscrires;
-    }
-
-    public function addInscrire(Inscrire $inscrire): static
-    {
-        if (!$this->inscrires->contains($inscrire)) {
-            $this->inscrires->add($inscrire);
-            $inscrire->setUtilisateur($this);
-        }
-
-        return $this;
-    }
-
-    public function removeInscrire(Inscrire $inscrire): static
-    {
-        if ($this->inscrires->removeElement($inscrire)) {
-            // set the owning side to null (unless already changed)
-            if ($inscrire->getUtilisateur() === $this) {
-                $inscrire->setUtilisateur(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Suivre>
-     */
-    public function getSuivres(): Collection
-    {
-        return $this->suivres;
-    }
-
-    public function addSuivre(Suivre $suivre): static
-    {
-        if (!$this->suivres->contains($suivre)) {
-            $this->suivres->add($suivre);
-            $suivre->addUtilisateur($this);
-        }
-
-        return $this;
-    }
-
-    public function removeSuivre(Suivre $suivre): static
-    {
-        if ($this->suivres->removeElement($suivre)) {
-            $suivre->removeUtilisateur($this);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Emarger>
-     */
-    public function getEmargers(): Collection
-    {
-        return $this->emargers;
-    }
-
-    public function addEmarger(Emarger $emarger): static
-    {
-        if (!$this->emargers->contains($emarger)) {
-            $this->emargers->add($emarger);
-            $emarger->setUtilisateur($this);
-        }
-
-        return $this;
-    }
-
-    public function removeEmarger(Emarger $emarger): static
-    {
-        if ($this->emargers->removeElement($emarger)) {
-            // set the owning side to null (unless already changed)
-            if ($emarger->getUtilisateur() === $this) {
-                $emarger->setUtilisateur(null);
-            }
-        }
 
         return $this;
     }

@@ -13,6 +13,36 @@ login:
     path: /login
     controller: App\Controller\LoginController::login
 
-menu_utilisateur:
-    path: /menu_utilisateur
-    controller: App\Controller\MenuUtilisateurController::index
+app_admin:
+    path: /admin
+    controller: App\Controller\AdminController::index
+
+app_eleve:
+    path: /eleve
+    controller: App\Controller\EleveController::index
+
+app_formateur:
+    path: /formateur
+    controller: App\Controller\FormateurController::index
+
+
+app_utilisateur_index:
+    path: /admin/utilisateur
+    controller: App\Controller\UtilisateurController::index
+
+app_utilisateur_new:
+    path: /admin/utilisateur/new
+    controller: App\Controller\UtilisateurController::new
+
+app_utilisateur_show:
+    path: /admin/utilisateur/{id}
+    controller: App\Controller\UtilisateurController::show
+
+app_utilisateur_edit:
+    path: /admin/utilisateur/{id}/edit
+    controller: App\Controller\UtilisateurController::edit
+
+app_utilisateur_delete:
+    path: /admin/utilisateur/{id}
+    controller: App\Controller\UtilisateurController::delete
+

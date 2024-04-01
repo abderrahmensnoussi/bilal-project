@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+    <h1>Utilisateur Liste</h1>
+
+    <table class="table basic-table">
+        <thead>
+            <tr>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Civilité</th>
+                <th>NomUsuel</th>
+                <th>NomNaissance</th>
+                <th>Prenom</th>
+                <th>Numtel</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for utilisateur in utilisateurs %}
+            <tr>
+                <td>{{ utilisateur.email }}</td>
+                <td>{{ utilisateur.roles[0] }}</td>
+                <td>{% if utilisateur.civilite is not null %}{{utilisateur.civilite ? 'Mr' : 'Mme' }}{% endif %}</td>
+                <td>{{ utilisateur.nomUsuel }}</td>
+                <td>{{ utilisateur.nomNaissance }}</td>
+                <td>{{ utilisateur.prenom }}</td>
+                <td>{{ utilisateur.numtel }}</td>
+                <td>
+                    <a class="btn btn-primary" href="{{ path('app_utilisateur_show', {'id': utilisateur.id}) }}">montrer</a>
+                    <a class="btn btn-primary" href="{{ path('app_utilisateur_edit', {'id': utilisateur.id}) }}">modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="row-block">
+        <a class="btn btn-primary" href="{{ path('app_utilisateur_new') }}">Ajouter Utilisateur</a>
+    </div>
+{% endblock %}

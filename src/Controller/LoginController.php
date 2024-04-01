@@ -2,43 +2,35 @@
 
 namespace App\Controller;
 
-use App\Entity\Utilisateur;
-use App\Form\LoginFormulaireType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class LoginController extends AbstractController
 {
-    public function login(Request $request, AuthenticationUtils $authenticationUtils): Response
+    #[Route(path: '/login', name: 'app_login')]
+    public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        // Obtenez le message d'erreur de l'authentification, s'il existe
-        $error = $authenticationUtils->getLastAuthenticationError();
+        // if ($this->getUser()) {
+        //     return $this->redirectToRoute('target_path');
+        // }
 
-        // Récupérez le nom d'utilisateur saisi précédemment par l'utilisateur
+        // get the login error if there is one
+        $error = $authenticationUtils->getLastAuthenticationError();
+        // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        // Créez une instance de votre formulaire de connexion
-        $user = new Utilisateur();
-        $form = $this->createForm(LoginFormulaireType::class, $user);
-
-        // Gérez la soumission du formulaire
-        $form->handleRequest($request);
-
-        // Traitez les données soumises si le formulaire est soumis et valide
-        if ($form->isSubmitted() && $form->isValid()) {
-            // Vous pouvez ici ajouter votre logique d'authentification
-            // Par exemple, vous pouvez vérifier les informations d'identification
-            // et rediriger l'utilisateur vers une page spécifique s'il est authentifié avec succès.
-        }
-
-        // Afficher le formulaire dans votre vue
-        return $this->render('login.html.twig', [
-            'form' => $form->createView(),
+        return $this->render('security/login.html.twig',[
             'last_username' => $lastUsername,
             'error' => $error,
+            'title' => 'Connexion',
         ]);
+    }
+
+    #[Route(path: '/logout', name: 'app_logout')]
+    public function logout(): void
+    {
+        throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
 }
