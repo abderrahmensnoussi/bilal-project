@@ -39,6 +39,17 @@
                 <th>Numtel</th>
                 <td>{{ utilisateur.numtel }}</td>
             </tr>
+            <tr>
+                <th>Promotions</th>
+                <td>
+                    {% for insc in utilisateur.inscriptions %}
+                        {% if insc.promotion.formation is not null %}
+                            {{ insc.promotion.formation.specialite }}{{ (insc.promotion.formation.options is not null) ? ' - ' ~ insc.promotion.formation.options.nomOption : '' }}
+                        {% endif %}
+                        {{insc.promotion.annee}}<br>
+                    {% endfor %}
+                </td>
+            </tr>
         </tbody>
     </table>
 

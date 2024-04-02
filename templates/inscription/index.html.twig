@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+    <h1>Inscription Liste</h1>
+
+    <table class="table basic-table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Promotion</th>
+                <th>Eleve</th>
+                <th>Date Entree</th>
+                <th>Date Sortie</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for inscription in inscriptions %}
+            <tr>
+                <td>{{ inscription.id }}</td>
+                <td>{{ inscription.promotion.formation.specialite }}{{ (inscription.promotion.formation.options is not null) ? ' - ' ~ inscription.promotion.formation.options.nomOption : '' }} {{ inscription.promotion.annee }}</td>
+                <td>{{ inscription.eleve.nomNaissance }} {{ inscription.eleve.prenom }}</td>
+                <td>{{ inscription.dateEntree ? inscription.dateEntree|date('Y-m-d') : '' }}</td>
+                <td>{{ inscription.dateSortie ? inscription.dateSortie|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a class="btn btn-primary" href="{{ path('app_inscription_edit', {'id': inscription.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">Aucun enregistrement trouvé</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="row-block">
+        <a class="btn btn-primary" href="{{ path('app_inscription_new') }}">Ajouter Innscription</a>
+    </div>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+    <h1>Créer  Formation</h1>
+
+    {{ include('formation/_form.html.twig') }}
+
+    <a class="btn btn-primary" href="{{ path('app_formation_index') }}">Liste</a>
+{% endblock %}

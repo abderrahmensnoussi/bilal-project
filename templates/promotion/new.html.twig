@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+    <h1>Créer Promotion</h1>
+
+    {{ include('promotion/_form.html.twig') }}
+
+    <a class="btn btn-primary" href="{{ path('app_promotion_index') }}">Liste</a>
+{% endblock %}

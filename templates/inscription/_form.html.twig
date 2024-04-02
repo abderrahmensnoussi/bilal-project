@@ -1,0 +1,26 @@
+{{ form_start(form) }}
+    {{ form_errors(form) }}
+
+    <div class="form-group">
+        {{ form_label(form.promotion) }}
+        {{ form_widget(form.promotion, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.promotion) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.eleve) }}
+        {{ form_widget(form.eleve, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.eleve) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.dateEntree) }}
+        {{ form_widget(form.dateEntree, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.dateEntree) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.dateSortie) }}
+        {{ form_widget(form.dateSortie, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.dateSortie) }}
+    </div>
+
+    <button class="btn">{{ button_label|default('Ajouter Inscription') }}</button>
+{{ form_end(form) }}

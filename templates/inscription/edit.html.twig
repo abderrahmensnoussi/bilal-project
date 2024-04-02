@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+    <h1>Modifier Inscription</h1>
+
+    {{ include('inscription/_form.html.twig', {'button_label': 'Mettre a jour'}) }}
+
+    <div class="row-block">
+        <a class="btn btn-primary" href="{{ path('app_inscription_index') }}">Liste</a>
+        {{ include('inscription/_delete_form.html.twig') }}
+    </div>
+{% endblock %}

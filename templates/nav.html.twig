@@ -2,6 +2,9 @@
     <ul class="nav-links">
         {% if app.user.roles[0] == 'ROLE_ADMIN' %}
             <li><a href="{{ path('app_utilisateur_index') }}">Utilisateurs</a></li>
+            <li><a href="{{ path('app_inscription_index') }}">Inscription</a></li>
+            <li><a href="{{ path('app_formation_index') }}">Formations</a></li>
+            <li><a href="{{ path('app_promotion_index') }}">Promotions</a></li>
         {% endif %}
         {% if app.user.roles[0] == 'ROLE_FORMATEUR' %}
 

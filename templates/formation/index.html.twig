@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+    <h1>Formations Liste</h1>
+
+    <table class="table basic-table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Specialite</th>
+                <th>Certification</th>
+                <th>Option</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for formation in formations %}
+            <tr>
+                <td>{{ formation.id }}</td>
+                <td>{{ formation.specialite }}</td>
+                <td>{{ formation.certification }}</td>
+                <td>{{ (formation.options is not null) ? formation.options.nomOption : '' }}</td>
+                <td>
+                    <a class="btn btn-primary" href="{{ path('app_formation_show', {'id': formation.id}) }}">montrer</a>
+                    <a class="btn btn-primary" href="{{ path('app_formation_edit', {'id': formation.id}) }}">modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">Aucun enregistrement trouvé</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="row-block">
+        <a class="btn btn-primary" href="{{ path('app_formation_new') }}">Créer Formation</a>
+    </div>
+{% endblock %}

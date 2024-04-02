@@ -8,41 +8,123 @@ controllers:
 index:
     path: /
     controller: App\Controller\IndexController::index
+    methods: ['GET']
 
 login:
     path: /login
     controller: App\Controller\LoginController::login
+    methods: ['GET', 'POST']
 
 app_admin:
     path: /admin
     controller: App\Controller\AdminController::index
+    methods: ['GET']
 
 app_eleve:
     path: /eleve
     controller: App\Controller\EleveController::index
+    methods: ['GET']
 
 app_formateur:
     path: /formateur
     controller: App\Controller\FormateurController::index
+    methods: ['GET']
 
-
+# Gestion des Utilisateurs
 app_utilisateur_index:
     path: /admin/utilisateur
     controller: App\Controller\UtilisateurController::index
+    methods: ['GET']
 
 app_utilisateur_new:
     path: /admin/utilisateur/new
     controller: App\Controller\UtilisateurController::new
+    methods: ['GET', 'POST']
 
 app_utilisateur_show:
     path: /admin/utilisateur/{id}
     controller: App\Controller\UtilisateurController::show
+    methods: ['GET']
 
 app_utilisateur_edit:
     path: /admin/utilisateur/{id}/edit
     controller: App\Controller\UtilisateurController::edit
+    methods: ['GET', 'POST']
 
 app_utilisateur_delete:
     path: /admin/utilisateur/{id}
     controller: App\Controller\UtilisateurController::delete
+    methods: ['POST']
 
+# Gestion des Formations
+app_formation_index:
+    path: /admin/formation
+    controller: App\Controller\FormationController::index
+    methods: ['GET']
+
+app_formation_new:
+    path: /admin/formation/new
+    controller: App\Controller\FormationController::new
+    methods: ['GET', 'POST']
+
+app_formation_show:
+    path: /admin/formation/{id}
+    controller: App\Controller\FormationController::show
+    methods: ['GET']
+
+app_formation_edit:
+    path: /admin/formation/{id}/edit
+    controller: App\Controller\FormationController::edit
+    methods: ['GET', 'POST']
+
+app_formation_delete:
+    path: /admin/formation/{id}
+    controller: App\Controller\FormationController::delete
+    methods: ['POST']
+
+# Gestion des Promotions
+app_promotion_index:
+    path: /admin/promotion
+    controller: App\Controller\PromotionController::index
+    methods: ['GET']
+
+app_promotion_new:
+    path: /admin/promotion/new
+    controller: App\Controller\PromotionController::new
+    methods: ['GET', 'POST']
+
+app_promotion_show:
+    path: /admin/promotion/{id}
+    controller: App\Controller\PromotionController::show
+    methods: ['GET']
+
+app_promotion_edit:
+    path: /admin/promotion/{id}/edit
+    controller: App\Controller\PromotionController::edit
+    methods: ['GET', 'POST']
+
+app_promotion_delete:
+    path: /admin/promotion/{id}
+    controller: App\Controller\PromotionController::delete
+    methods: ['POST']
+
+# Gestion des Promotions
+app_inscription_index:
+    path: /admin/inscription
+    controller: App\Controller\InscriptionController::index
+    methods: ['GET']
+
+app_inscription_new:
+    path: /admin/inscription/new
+    controller: App\Controller\InscriptionController::new
+    methods: ['GET', 'POST']
+
+app_inscription_edit:
+    path: /admin/inscription/{id}/edit
+    controller: App\Controller\InscriptionController::edit
+    methods: ['GET', 'POST']
+
+app_inscription_delete:
+    path: /admin/inscription/{id}
+    controller: App\Controller\InscriptionController::delete
+    methods: ['POST']
