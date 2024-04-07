@@ -10,7 +10,7 @@ index:
     controller: App\Controller\IndexController::index
     methods: ['GET']
 
-login:
+app_login:
     path: /login
     controller: App\Controller\LoginController::login
     methods: ['GET', 'POST']
@@ -108,7 +108,7 @@ app_promotion_delete:
     controller: App\Controller\PromotionController::delete
     methods: ['POST']
 
-# Gestion des Promotions
+# Gestion des Inscriptions
 app_inscription_index:
     path: /admin/inscription
     controller: App\Controller\InscriptionController::index
@@ -128,3 +128,46 @@ app_inscription_delete:
     path: /admin/inscription/{id}
     controller: App\Controller\InscriptionController::delete
     methods: ['POST']
+
+# Gestion des Sessions
+app_session_index:
+    path: /admin/session
+    controller: App\Controller\SessionController::index
+    methods: ['GET']
+
+app_session_new:
+    path: /admin/session/new
+    controller: App\Controller\SessionController::new
+    methods: ['GET', 'POST']
+
+app_session_show:
+    path: /admin/session/{id}
+    controller: App\Controller\SessionController::show
+    methods: ['GET']
+
+app_session_edit:
+    path: /admin/session/{id}/edit
+    controller: App\Controller\SessionController::edit
+    methods: ['GET', 'POST']
+
+app_session_delete:
+    path: /admin/session/{id}
+    controller: App\Controller\SessionController::delete
+    methods: ['POST']
+
+# Emploi du temps
+
+app_emploi_admin:
+    path: /admin/emploi
+    controller: App\Controller\EmploiTempsController::adminIndex
+    methods: ['GET', 'POST']
+
+app_emploi_formateur:
+    path: /formateur/emploi
+    controller: App\Controller\EmploiTempsController::formateurIndex
+    methods: ['GET', 'POST']
+
+app_emploi_eleve:
+    path: /eleve/emploi
+    controller: App\Controller\EmploiTempsController::eleveIndex
+    methods: ['GET', 'POST']

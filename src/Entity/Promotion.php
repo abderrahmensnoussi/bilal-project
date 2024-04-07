@@ -35,9 +35,13 @@ class Promotion
     #[ORM\OneToMany(targetEntity: Inscription::class, mappedBy: 'promotion')]
     private Collection $inscriptions;
 
+    #[ORM\OneToMany(targetEntity: Session::class, mappedBy: 'promotion')]
+    private Collection $sessions;
+
     public function __construct()
     {
         $this->inscriptions = new ArrayCollection();
+        $this->sessions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -129,6 +133,36 @@ class Promotion
             // set the owning side to null (unless already changed)
             if ($inscription->getPromotion() === $this) {
                 $inscription->setPromotion(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Session>
+     */
+    public function getSessions(): Collection
+    {
+        return $this->sessions;
+    }
+
+    public function addSession(Session $session): static
+    {
+        if (!$this->sessions->contains($session)) {
+            $this->sessions->add($session);
+            $session->setPromotion($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSession(Session $session): static
+    {
+        if ($this->sessions->removeElement($session)) {
+            // set the owning side to null (unless already changed)
+            if ($session->getPromotion() === $this) {
+                $session->setPromotion(null);
             }
         }
 

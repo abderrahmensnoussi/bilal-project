@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+
+<h1>EMPLOI DU TEMPS</h1>
+
+    {{ include('/emploi_temps/common/_form.html.twig') }}
+
+    {% if dataArray|length != 0 %}
+        {{ include('/emploi_temps/common/emploi_temps.html.twig') }}
+    {% endif %}
+{% endblock %}
+
+{# , {'value': 'default_value_for_field1'} #}

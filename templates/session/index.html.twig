@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+    <h1>Sessions Liste</h1>
+    <div class="row-block">
+        <a class="btn btn-primary" href="{{ path('app_session_new') }}">Ajouter Session</a>
+    </div>
+    <table class="table basic-table" id="myTable">
+        <thead>
+            <tr>
+                <th>Promotion</th>
+                <th>Matiere</th>
+                <th>Intitule</th>
+                <th>DateSession</th>
+                <th>HeureDebut</th>
+                <th>HeureFin</th>
+                <th>Salle</th>
+                <th>Formateur</th>
+                <th>Commentaire</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for session in sessions %}
+            <tr>
+                <td>{{ session.promotion.formation.specialite }}{{ (session.promotion.formation.options is not null) ? ' - ' ~ session.promotion.formation.options.nomOption : '' }} {{ session.promotion.annee }}</td>
+                <td>{{ session.matiere.nomMatiere }}</td>
+                <td>{{ session.intitule }}</td>
+                <td>{{ session.dateSession ? session.dateSession|date('Y-m-d') : '' }}</td>
+                <td>{{ session.heureDebut ? session.heureDebut|date('H:i') : '' }}</td>
+                <td>{{ session.heureFin ? session.heureFin|date('H:i') : '' }}</td>
+                <td>{{ session.salle.nomSalle }}</td>
+                <td>{{ session.formateur.nomNaissance }} {{ session.formateur.prenom }}</td>
+                <td>{{ session.commentaire }}</td>
+                <td>
+                    <a href="{{ path('app_session_show', {'id': session.id}) }}"><i class="fa-solid fa-eye"></i></a>
+                    <a href="{{ path('app_session_edit', {'id': session.id}) }}"><i class="fa-solid fa-pen-to-square"></i></a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <script>
+        $('#myTable').DataTable( {
+        "language": {
+            "lengthMenu": "_MENU_ elements par page",
+            "info": "page _PAGE_ de _PAGES_",
+            "search": 'recherche',
+            "emptyTable": "Aucune donnée disponible dans le tableau",
+        }
+    } );
+    </script>
+{% endblock %}

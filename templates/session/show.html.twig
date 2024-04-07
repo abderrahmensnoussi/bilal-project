@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+    <h1>Session</h1>
+
+    <table class="table basic-table">
+        <tbody>
+            <tr>
+                <th>Intitule</th>
+                <td>{{ session.intitule }}</td>
+            </tr>
+            <tr>
+                <th>Promotion</th>
+                <td>{{ session.promotion.formation.specialite }}{{ (session.promotion.formation.options is not null) ? ' - ' ~ session.promotion.formation.options.nomOption : '' }} {{ session.promotion.annee }}</td>
+            </tr>
+            <tr>
+                <th>Matiere</th>
+                <td>{{ session.matiere.nomMatiere }}</td>
+            </tr>
+            <tr>
+                <th>Salle</th>
+                <td>{{ session.salle.nomSalle }}</td>
+            </tr>
+            <tr>
+                <th>Formateur</th>
+                <td>{{ session.formateur.nomNaissance }} {{ session.formateur.prenom }}</td>
+            </tr>
+            <tr>
+                <th>DateSession</th>
+                <td>{{ session.dateSession ? session.dateSession|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>HeureDebut</th>
+                <td>{{ session.heureDebut ? session.heureDebut|date('H:i') : '' }}</td>
+            </tr>
+            <tr>
+                <th>HeureFin</th>
+                <td>{{ session.heureFin ? session.heureFin|date('H:i') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Commentaire</th>
+                <td>{{ session.commentaire }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="row-block">
+        <a class="btn btn-primary" href="{{ path('app_session_index') }}">Liste</a>
+        <a class="btn btn-primary" href="{{ path('app_session_edit', {'id': session.id}) }}">Modifier</a>
+        {{ include('session/_delete_form.html.twig') }}
+    </div>
+{% endblock %}

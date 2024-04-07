@@ -1,0 +1,51 @@
+{{ form_start(form) }}
+    {{ form_errors(form) }}
+
+    <div class="form-group">
+        {{ form_label(form.intitule) }}
+        {{ form_widget(form.intitule, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.intitule) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.promotion) }}
+        {{ form_widget(form.promotion, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.promotion) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.formateur) }}
+        {{ form_widget(form.formateur, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.formateur) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.matiere) }}
+        {{ form_widget(form.matiere, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.matiere) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.salle) }}
+        {{ form_widget(form.salle, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.salle) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.dateSession) }}
+        {{ form_widget(form.dateSession, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.dateSession) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.heureDebut) }}
+        {{ form_widget(form.heureDebut, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.heureDebut) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.heureFin) }}
+        {{ form_widget(form.heureFin, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.heureFin) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.commentaire) }}
+        {{ form_widget(form.commentaire, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.commentaire) }}
+    </div>
+
+    <button class="btn">{{ button_label|default('Enregistrer') }}</button>
+{{ form_end(form) }}

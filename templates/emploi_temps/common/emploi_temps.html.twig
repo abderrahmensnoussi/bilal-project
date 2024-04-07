@@ -1,0 +1,48 @@
+{% for key,dataWeek in dataArray %}
+    <table class="table basic-table" style="margin-top: 20px">
+        <caption class="caption-custom"><b>Semaine de {{ key|split('_')[0] }} - {{ key|split('_')[1] }}</b></caption>
+        <thead>
+            <tr>
+                <th>JOUR DATE</th>
+                <th>De...</th>
+                <th>A...</th>
+                {% if criteria['promotion'] == '' %}
+                    <th>PROMOTION</th>
+                {% endif %}
+                <th>MATIERE</th>
+                <th>SALLE</th>
+                {% if criteria['formateur'] == '' %}
+                    <th>FORMATEUR</th>
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for key2,data in dataWeek %}
+                {% set dateIsSet = false %}
+                {% for item in data %}    
+                    <tr>
+                        {% if dateIsSet == false %}
+                            <td rowspan="{{ data|length }}">
+                                <b>{{ key2|split('_')[0] }}</b> {{ key2|split('_')[1] }}
+                            </td>
+                            {% set dateIsSet = true %}
+                        {% endif %}
+                        <td>{{ item.heureDebut|date('H:i') }}</td>
+                        <td>{{ item.heureFin|date('H:i') }}</td>
+                        {% if criteria['promotion'] == '' %}
+                            <td>{{ item.promotion.formation.specialite }}{{ (item.promotion.formation.options is not null) ? ' - ' ~ item.promotion.formation.options.nomOption : '' }} {{ item.promotion.annee }}</td>
+                        {% endif %}
+                        <td>
+                            {{ item.intitule }}
+                            {{ item.matiere.nomMatiere }}
+                        </td>
+                        <td>{{ item.salle.nomSalle }}</td>
+                        {% if criteria['formateur'] == '' %}
+                            <td>{{ item.formateur.nomNaissance }} {{ item.formateur.prenom }}</td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+            {% endfor %}
+        </tbody>
+    </table>
+{% endfor %}

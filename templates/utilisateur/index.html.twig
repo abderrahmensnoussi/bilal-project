@@ -4,8 +4,10 @@
 
 {% block body %}
     <h1>Utilisateur Liste</h1>
-
-    <table class="table basic-table">
+    <div class="row-block">
+        <a class="btn btn-primary" href="{{ path('app_utilisateur_new') }}">Ajouter Utilisateur</a>
+    </div>
+    <table class="table basic-table" id="myTable">
         <thead>
             <tr>
                 <th>Email</th>
@@ -22,25 +24,29 @@
         {% for utilisateur in utilisateurs %}
             <tr>
                 <td>{{ utilisateur.email }}</td>
-                <td>{{ utilisateur.roles[0] }}</td>
+                <td>{{ utilisateur.roles[0]|split('_')[1] }}</td>
                 <td>{% if utilisateur.civilite is not null %}{{utilisateur.civilite ? 'Mr' : 'Mme' }}{% endif %}</td>
                 <td>{{ utilisateur.nomUsuel }}</td>
                 <td>{{ utilisateur.nomNaissance }}</td>
                 <td>{{ utilisateur.prenom }}</td>
                 <td>{{ utilisateur.numtel }}</td>
                 <td>
-                    <a class="btn btn-primary" href="{{ path('app_utilisateur_show', {'id': utilisateur.id}) }}">montrer</a>
-                    <a class="btn btn-primary" href="{{ path('app_utilisateur_edit', {'id': utilisateur.id}) }}">modifier</a>
+                    <a href="{{ path('app_utilisateur_show', {'id': utilisateur.id}) }}"><i class="fa-solid fa-eye"></i></a>
+                    <a href="{{ path('app_utilisateur_edit', {'id': utilisateur.id}) }}"><i class="fa-solid fa-pen-to-square"></i></a>
                 </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="10">Aucun enregistrement trouvé</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-    <div class="row-block">
-        <a class="btn btn-primary" href="{{ path('app_utilisateur_new') }}">Ajouter Utilisateur</a>
-    </div>
+
+    <script>
+        $('#myTable').DataTable( {
+        "language": {
+            "lengthMenu": "_MENU_ elements par page",
+            "info": "page _PAGE_ de _PAGES_",
+            "search": 'recherche',
+            "emptyTable": "Aucune donnée disponible dans le tableau"
+        }
+        } );
+    </script>
 {% endblock %}

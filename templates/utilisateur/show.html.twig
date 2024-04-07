@@ -16,8 +16,8 @@
                 <td>{{ utilisateur.email }}</td>
             </tr>
             <tr>
-                <th>Roles</th>
-                <td>{{ utilisateur.roles[0] }}</td>
+                <th>Role</th>
+                <td>{{ utilisateur.roles[0]|split('_')[1] }}</td>
             </tr>
             <tr>
                 <th>Civilite</th>

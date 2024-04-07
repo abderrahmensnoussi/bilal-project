@@ -4,8 +4,10 @@
 
 {% block body %}
     <h1>Promotion Liste</h1>
-
-    <table class="table basic-table">
+    <div class="row-block">
+        <a class="btn btn-primary" href="{{ path('app_promotion_new') }}">Créer Promotion</a>
+    </div>
+    <table class="table basic-table" id="myTable">
         <thead>
             <tr>
                 <th>Id</th>
@@ -27,18 +29,22 @@
                 <td>{{ promotion.dateDebut ? promotion.dateDebut|date('Y-m-d') : '' }}</td>
                 <td>{{ promotion.dateFin ? promotion.dateFin|date('Y-m-d') : '' }}</td>
                 <td>
-                    <a class="btn btn-primary" href="{{ path('app_promotion_show', {'id': promotion.id}) }}">show</a>
-                    <a class="btn btn-primary" href="{{ path('app_promotion_edit', {'id': promotion.id}) }}">edit</a>
+                    <a href="{{ path('app_promotion_show', {'id': promotion.id}) }}"><i class="fa-solid fa-eye"></i></a>
+                    <a href="{{ path('app_promotion_edit', {'id': promotion.id}) }}"><i class="fa-solid fa-pen-to-square"></i></a>
                 </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">Aucun enregistrement trouvé</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-    <div class="row-block">
-        <a class="btn btn-primary" href="{{ path('app_promotion_new') }}">Créer Promotion</a>
-    </div>
+
+    <script>
+        $('#myTable').DataTable( {
+        "language": {
+            "lengthMenu": "_MENU_ elements par page",
+            "info": "page _PAGE_ de _PAGES_",
+            "search": 'recherche',
+            "emptyTable": "Aucune donnée disponible dans le tableau"
+        }
+        } );
+    </script>
 {% endblock %}

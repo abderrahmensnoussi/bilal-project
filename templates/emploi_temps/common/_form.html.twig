@@ -1,0 +1,36 @@
+{{ form_start(form) }}
+    {{ form_errors(form) }}
+
+    {% if admin == true %}
+    <div>
+        <div class="form-group-search">
+            {{ form_label(form.promotion, 'Promotion', {'label_attr': {'class': 'search-label'}}) }}
+            {{ form_widget(form.promotion, {'attr': {'class': 'search-input'}}) }}
+            {{ form_errors(form.promotion) }}
+        </div>
+        <div class="form-group-search">
+            {{ form_label(form.eleve, 'Eleve', {'label_attr': {'class': 'search-label'}}) }}
+            {{ form_widget(form.eleve, {'attr': {'class': 'search-input'}}) }}
+            {{ form_errors(form.eleve) }}
+        </div>
+        <div class="form-group-search">
+            {{ form_label(form.formateur, 'Formateur', {'label_attr': {'class': 'search-label'}}) }}
+            {{ form_widget(form.formateur, {'attr': {'class': 'search-input'}}) }}
+            {{ form_errors(form.formateur) }}
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="form-group-search">
+        {{ form_label(form.dateDebut, 'Date aprés', {'label_attr': {'class': 'search-label'}}) }}
+        {{ form_widget(form.dateDebut, {'attr': {'class': 'search-input'}}) }}
+        {{ form_errors(form.dateDebut) }}
+    </div>
+    <div class="form-group-search">
+        {{ form_label(form.dateFin, 'Date avant', {'label_attr': {'class': 'search-label'}}) }}
+        {{ form_widget(form.dateFin, {'attr': {'class': 'search-input'}}) }}
+        {{ form_errors(form.dateFin) }}
+    </div>
+
+    <button class="btn">{{ button_label|default('Rechercher') }}</button>
+{{ form_end(form) }}
