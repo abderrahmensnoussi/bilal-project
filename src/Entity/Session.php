@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\SessionRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -44,6 +46,14 @@ class Session
     #[ORM\ManyToOne(inversedBy: 'sessions')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Utilisateur $formateur = null;
+
+    #[ORM\OneToMany(targetEntity: Emarger::class, mappedBy: 'session')]
+    private Collection $emargers;
+
+    public function __construct()
+    {
+        $this->emargers = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -154,6 +164,36 @@ class Session
     public function setFormateur(?Utilisateur $formateur): static
     {
         $this->formateur = $formateur;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Emarger>
+     */
+    public function getEmargers(): Collection
+    {
+        return $this->emargers;
+    }
+
+    public function addEmarger(Emarger $emarger): static
+    {
+        if (!$this->emargers->contains($emarger)) {
+            $this->emargers->add($emarger);
+            $emarger->setSession($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEmarger(Emarger $emarger): static
+    {
+        if ($this->emargers->removeElement($emarger)) {
+            // set the owning side to null (unless already changed)
+            if ($emarger->getSession() === $this) {
+                $emarger->setSession(null);
+            }
+        }
 
         return $this;
     }

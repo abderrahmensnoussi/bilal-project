@@ -14,6 +14,9 @@
                 {% if criteria['formateur'] == '' %}
                     <th>FORMATEUR</th>
                 {% endif %}
+                {% if is_granted('ROLE_FORMATEUR') or is_granted('ROLE_ADMIN') %}
+                    <th>Emargement</th>
+                {% endif %}
             </tr>
         </thead>
         <tbody>
@@ -39,6 +42,16 @@
                         <td>{{ item.salle.nomSalle }}</td>
                         {% if criteria['formateur'] == '' %}
                             <td>{{ item.formateur.nomNaissance }} {{ item.formateur.prenom }}</td>
+                        {% endif %}
+                        {% if is_granted('ROLE_FORMATEUR') %}
+                            <td>
+                                <a href="{{ path('app_emargement_show', {'id' : item.id}) }}"><i class="fa-solid fa-eye"></i></a>
+                                <a href="{{ path('app_emargement_edit', {'id' : item.id}) }}"><i class="fa-solid fa-pen-to-square"></i></a>
+                            </td>
+                        {% elseif is_granted('ROLE_ADMIN') %}
+                            <td>
+                                <a href="{{ path('app_emargement_show_admin', {'id' : item.id}) }}"><i class="fa-solid fa-eye"></i></a>
+                            </td>
                         {% endif %}
                     </tr>
                 {% endfor %}

@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+    <h1>Emargement</h1>
+    <h4>
+    Session: {{ session.intitule }}<br>
+    Date: {{ session.dateSession|date('d/m/Y') }}<br>
+    Heure Debut: {{ session.heureDebut|date('H:i') }}<br>
+    Heure Fin: {{ session.heureFin|date('H:i') }}<br>
+    </h4>
+
+    {{ form_start(form) }}
+        <div class="form-group">
+            {{ form_label(form.presence) }}
+            {{ form_widget(form.presence, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        <button class="btn">{{ button_label|default('Enregistrer') }}</button>
+    {{ form_end(form) }}
+
+{% endblock %}

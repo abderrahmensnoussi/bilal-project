@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+    <h1>Emargement
+        {% if is_granted('ROLE_FORMATEUR') %}
+            <a href="{{ path('app_emargement_edit', {'id' : session.id}) }}" style="color: blue"><i class="fa-solid fa-pen-to-square"></i></a>
+        {% endif %}
+    </h1>
+    <h4>
+    Session: {{ session.intitule }}<br>
+    Date: {{ session.dateSession|date('d/m/Y') }}<br>
+    Heure Debut: {{ session.heureDebut|date('H:i') }}<br>
+    Heure Fin: {{ session.heureFin|date('H:i') }}<br>
+    </h4>
+
+    
+    <table class="table basic-table">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Presence</th>
+                <th>Alternative</th>
+                <th>Heure Arrive</th>
+                <th>Heure Départ</th>
+                <th>Signature</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for emarger in emargements %}
+        <tr>
+            <td>{{ emarger.utilisateur.nomNaissance }}</td>
+            <td>{{ emarger.utilisateur.prenom }}</td>
+            <td>
+                {% if emarger.presence is not null %}
+                    {{ (emarger.presence == 1) ? 'Présent' : 'Absent' }}
+                {% endif %}
+            </td>
+            <td>
+                {{ emarger.alternative }}
+            </td>
+            <td>
+                {{ (emarger.heureArrive is not null) ? emarger.heureArrive|date('H:i') : '' }}
+            </td>
+            <td>
+                {{ (emarger.heureDepart is not null) ? emarger.heureDepart|date('H:i') : '' }}
+            </td>
+            <td>{% if emarger.signature == 1 %}Signé{% endif %}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

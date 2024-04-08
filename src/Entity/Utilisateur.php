@@ -56,10 +56,14 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Session::class, mappedBy: 'formateur')]
     private Collection $sessions;
 
+    #[ORM\OneToMany(targetEntity: Emarger::class, mappedBy: 'utilisateur')]
+    private Collection $emargers;
+
     public function __construct()
     {
         $this->inscriptions = new ArrayCollection();
         $this->sessions = new ArrayCollection();
+        $this->emargers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -249,6 +253,36 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($session->getFormateur() === $this) {
                 $session->setFormateur(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Emarger>
+     */
+    public function getEmargers(): Collection
+    {
+        return $this->emargers;
+    }
+
+    public function addEmarger(Emarger $emarger): static
+    {
+        if (!$this->emargers->contains($emarger)) {
+            $this->emargers->add($emarger);
+            $emarger->setUtilisateur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEmarger(Emarger $emarger): static
+    {
+        if ($this->emargers->removeElement($emarger)) {
+            // set the owning side to null (unless already changed)
+            if ($emarger->getUtilisateur() === $this) {
+                $emarger->setUtilisateur(null);
             }
         }
 

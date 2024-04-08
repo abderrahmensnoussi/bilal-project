@@ -171,3 +171,30 @@ app_emploi_eleve:
     path: /eleve/emploi
     controller: App\Controller\EmploiTempsController::eleveIndex
     methods: ['GET', 'POST']
+
+# emargement
+
+app_emargement_edit:
+    path: /formateur/emargement/{id}
+    controller: App\Controller\EmargementController::emargementEdit
+    methods: ['GET', 'POST']
+
+app_emargement_show:
+    path: /formateur/emargement/show/{id}
+    controller: App\Controller\EmargementController::emargementShow
+    methods: ['GET']
+
+app_emargement_show_admin:
+    path: /admin/emargement/show/{id}
+    controller: App\Controller\EmargementController::emargementShow
+    methods: ['GET']
+
+app_emargement_eleve:
+    path: /eleve/mes-emargement/
+    controller: App\Controller\EmargementController::emargementEleve
+    methods: ['GET']
+
+app_emarger_eleve:
+    path: /eleve/emarger/{id}
+    controller: App\Controller\EmargementController::emargerEleve
+    methods: ['GET', 'POST']

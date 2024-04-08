@@ -1,0 +1,43 @@
+{{ form_start(form) }}
+
+    <table class="table basic-table">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Presence</th>
+                <th>Alternative</th>
+                <th>Heure Arrive</th>
+                <th>Heure Départ</th>
+                <th>Signature</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for emergerField in form.emargers %}
+        <tr>
+            <td>{{ emergerField.vars.value.utilisateur.nomNaissance }}</td>
+            <td>{{ emergerField.vars.value.utilisateur.prenom }}</td>
+            <td>
+                {{ form_errors(emergerField.presence) }}
+                {{ form_widget(emergerField.presence) }}
+            </td>
+            <td>
+                {{ form_errors(emergerField.alternative) }}
+                {{ form_widget(emergerField.alternative) }}
+            </td>
+            <td>
+                {{ form_errors(emergerField.heureArrive) }}
+                {{ form_widget(emergerField.heureArrive) }}
+            </td>
+            <td>
+                {{ form_errors(emergerField.heureDepart) }}
+                {{ form_widget(emergerField.heureDepart) }}
+            </td>
+            <td>{{ emergerField.vars.value.signature }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <button class="btn">{{ button_label|default('Enregistrer') }}</button>
+{{ form_end(form) }}
